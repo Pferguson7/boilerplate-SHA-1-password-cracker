@@ -1,6 +1,5 @@
 import hashlib
 
-from matplotlib import use
 
 hashed_pw = input("Please provide the hash:\n")
 def crack_sha1_hash(hash, use_salts = False):
@@ -26,9 +25,16 @@ def crack_sha1_hash(hash, use_salts = False):
     return "PASSWORD NOT FOUND IN DATABASE"
 
 
+user_answer = input("Would you like to check for the salt version ?\nPlease type \"yes\" or \"no\" or press \"q\" to quit! \n")
+
+if user_answer == "yes":
+    key = crack_sha1_hash(hashed_pw, use_salts=True)
+    print(f"Here is the password that you were looking for: {key}")
+elif user_answer == "q":
+    print("Thanks for stopping by!")
+else:
+    key = crack_sha1_hash(hashed_pw)
+    print(f"Here is the password that you were looking for: {key}")
 
 
 
-key = crack_sha1_hash(hashed_pw, use_salts=True)
-
-print(key)
