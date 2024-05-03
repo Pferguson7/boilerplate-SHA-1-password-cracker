@@ -14,9 +14,11 @@ My motivation for undertaking this project stemmed from a desire to deepen my un
 Data Collection: I sourced a dataset provided by https://www.freecodecamp.org/ conisting of over 10,000 commonly used passwords from various public datasets and breaches.
 Hash Computation: Checking SHA1 hashes of each password using the hashlib Python library. 
 Password Verification: When testing passwords, I compared the hash value of each password against the entries in my rainbow table. If a match was found, it indicated the presence of a weak or commonly used password.
+Checking for salt: If user requested, this function also prepends, and appends common salt values to each password before converting the password to it's hash value. After conversion the comparison is made!
+
 # Key Learnings
 Password Security Awareness: Through this project, I gained a deeper appreciation for the importance of strong, unique passwords in safeguarding sensitive information.
 Hashing Techniques: I explored various cryptographic hashing algorithms and their implications for password security, including the benefits of incorporating salts to mitigate rainbow table attacks.
 # Recommendations
 Strengthen Password Policies: Encourage users to adopt strong, complex passwords and educate them about the risks associated with weak or common passwords.
-Implement Salting: Consider incorporating cryptographic salts into password hashing processes to enhance security and thwart rainbow table attacks.
+
