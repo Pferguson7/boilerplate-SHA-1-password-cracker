@@ -1,7 +1,6 @@
 import hashlib
-from tkinter import Y
 
-hashed_pw = input("Please provide the hash:\n")
+hashed_pw = input("Please provide the hash or press \"q\" to quit:\n")
 
 def crack_sha1_hash(hash, use_salts = False):
     with open("top-10000-passwords.txt", "r") as f:
@@ -9,7 +8,8 @@ def crack_sha1_hash(hash, use_salts = False):
 
     with open("known-salts.txt", "r") as salt_file:
         salts = [salt.strip() for salt in salt_file.readlines()]
-
+    
+    
     if use_salts:
         for password in passwords:
             for salt in salts:
@@ -25,17 +25,27 @@ def crack_sha1_hash(hash, use_salts = False):
 
     return "PASSWORD NOT IN DATABASE"
 
+multiple_attempts = ''
 
-user_answer = input("Would you like to check for the salt version ?\nPlease type \"yes\" or \"no\" or press \"q\" to quit! \n")
+while multiple_attempts != "q":
+    use_salts = input("Would you like to check for the salted version? Press \"y\" or \"n\".\n")
 
-if user_answer == 'yes':
-    key = crack_sha1_hash(hashed_pw, use_salts=True)
-    print(f"Here is the password that you were looking for: {key}")
-elif user_answer == 'no':
-    key = crack_sha1_hash(hashed_pw)
-    print(f"Here is the password that you were looking for: {key}")
-elif user_answer == "q":
-    print("Thanks for stopping by::)!")
+    if use_salts == "y":
+        key = crack_sha1_hash(hashed_pw, use_salts=True)
+        print(f"Here is the password: {key}")
+    elif use_salts == "n":
+        key = crack_sha1_hash(hashed_pw)
+        print(f"Here is the password: {key}")
+    
+    multiple_attempts = input("Please provide the hash or press \"q\" to quit:\n")
+
+    if multiple_attempts == "q":
+        print("See you next time!")
+
+
+
+
+
 
 
 
